@@ -13,15 +13,9 @@ class MainWindow(QWidget):
         self.generar_interfaz()
         self.show()
 
-    # QPushButton
-    # background-color
-    #
-    # QPushButton:pressed (
-    #     background-color: #e89127
-    # )
     def generar_interfaz(self):
         self.pantalla = QTextEdit()
-        self.pantalla.setDisabled(False)
+        self.pantalla.setDisabled(True)
         boton_1 = QPushButton("1")
         boton_2 = QPushButton("2")
         boton_3 = QPushButton("3")
@@ -38,7 +32,6 @@ class MainWindow(QWidget):
         boton_resta = QPushButton("-")
         boton_multiplicacion = QPushButton("*")
         boton_division = QPushButton("/")
-        boton_division.setStyleSheet("background-color: #e89127")
 
         boton_AC = QPushButton("AC")
         boton_mas_menos = QPushButton("+/-")
