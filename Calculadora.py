@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import (QApplication, QWidget, QTextEdit, QPushButton, QGridLayout)
+from PySide6.QtWidgets import (QApplication, QWidget, QTextEdit, QPushButton, QGridLayout, QLineEdit)
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -13,30 +13,52 @@ class MainWindow(QWidget):
         self.generar_interfaz()
         self.show()
 
+    def mostrar(self, texto):
+        self.pantalla.setText(self.pantalla.text() + texto)
+
+    def resultado(self):
+        resultado = eval(self.pantalla.text())
+        self.pantalla.setText(str(resultado))
     def generar_interfaz(self):
-        self.pantalla = QTextEdit()
+        self.pantalla = QLineEdit()
         self.pantalla.setDisabled(True)
         boton_1 = QPushButton("1")
+        boton_1.clicked.connect(lambda: self.mostrar("1"))
         boton_2 = QPushButton("2")
+        boton_2.clicked.connect(lambda: self.mostrar("2"))
         boton_3 = QPushButton("3")
+        boton_3.clicked.connect(lambda: self.mostrar("3"))
         boton_4 = QPushButton("4")
+        boton_4.clicked.connect(lambda: self.mostrar("4"))
         boton_5 = QPushButton("5")
+        boton_5.clicked.connect(lambda: self.mostrar("5"))
         boton_6 = QPushButton("6")
+        boton_6.clicked.connect(lambda: self.mostrar("6"))
         boton_7 = QPushButton("7")
+        boton_7.clicked.connect(lambda: self.mostrar("7"))
         boton_8 = QPushButton("8")
+        boton_8.clicked.connect(lambda: self.mostrar("8"))
         boton_9 = QPushButton("9")
+        boton_9.clicked.connect(lambda: self.mostrar("9"))
         boton_0 = QPushButton("0")
+        boton_0.clicked.connect(lambda: self.mostrar("0"))
         boton_coma = QPushButton(",")
 
         boton_suma = QPushButton("+")
+        boton_suma.clicked.connect(lambda: self.mostrar("+"))
         boton_resta = QPushButton("-")
+        boton_resta.clicked.connect(lambda: self.mostrar("-"))
         boton_multiplicacion = QPushButton("*")
+        boton_multiplicacion.clicked.connect(lambda: self.mostrar("*"))
         boton_division = QPushButton("/")
+        boton_division.clicked.connect(lambda: self.mostrar("/"))
 
         boton_AC = QPushButton("AC")
+        boton_AC.clicked.connect(lambda: self.pantalla.clear())
         boton_mas_menos = QPushButton("+/-")
         boton_porciento = QPushButton("%")
         boton_resultado = QPushButton("=")
+        boton_resultado.clicked.connect(lambda: self.resultado())
 
         botones = [boton_1, boton_2, boton_3, boton_4, boton_5, boton_6,
                    boton_7, boton_8, boton_9, boton_0, boton_coma, boton_suma, boton_resta,
