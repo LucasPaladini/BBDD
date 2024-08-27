@@ -18,6 +18,7 @@ class MainWindow(QWidget, Ui_Form):
         new_text = current_text + "1"
         self.textEdit.setPlainText(new_text)
 
+#asd
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
