@@ -1,47 +1,52 @@
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QTextEdit, QLineEdit
-from PySide6.QtCore import Slot
-from QTDesigner_ui_cod import Ui_Form  # Asegúrate de que este nombre coincida con el archivo que contiene Ui_Form
+from PySide6.QtWidgets import QApplication, QWidget, QTextEdit, QLineEdit
+from QTDesigner_ui_codigo import Ui_Form
+
 
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        self.__setup_connections()
+        self.setWindowTitle("Calculadora ISPI 4038")
 
-    def mostrar(self, texto):
-        self.ui.setText(self.ui.text() + texto)
+    def conector_botones_pantalla(self):
+        # Conectar msj de botones al mostrar
+        self.ui.boton_ac.clicked.connect(lambda: self.__agregar_valor("AC"))
+        self.ui.boton_cambio_signo.clicked.connect(lambda: self.__agregar_valor("+/-"))
+        self.ui.boton_porciento.clicked.connect(lambda: self.__agregar_valor("%"))
+        self.ui.boton_dividido.clicked.connect(lambda: self.__agregar_valor("/"))
+        self.ui.boton_multiplicacion.clicked.connect(lambda: self.__agregar_valor("*"))
+        self.ui.boton_suma.clicked.connect(lambda: self.__agregar_valor("+"))
+        self.ui.boton_menos.clicked.connect(lambda: self.__agregar_valor("-"))
+        self.ui.boton_igual.clicked.connect(lambda: self.__agregar_valor("="))
+        self.ui.boton_coma.clicked.connect(lambda: self.__agregar_valor(","))
+        self.ui.boton_1.clicked.connect(lambda: self.__agregar_valor("1"))
+        self.ui.boton_2.clicked.connect(lambda: self.__agregar_valor("2"))
+        self.ui.boton_3.clicked.connect(lambda: self.__agregar_valor("3"))
+        self.ui.boton_4.clicked.connect(lambda: self.__agregar_valor("4"))
+        self.ui.boton_5.clicked.connect(lambda: self.__agregar_valor("5"))
+        self.ui.boton_6.clicked.connect(lambda: self.__agregar_valor("6"))
+        self.ui.boton_7.clicked.connect(lambda: self.__agregar_valor("7"))
+        self.ui.boton_8.clicked.connect(lambda: self.__agregar_valor("8"))
+        self.ui.boton_9.clicked.connect(lambda: self.__agregar_valor("9"))
+        self.ui.boton_0.clicked.connect(lambda: self.__agregar_valor("0"))
+        self.ui.boton_igual.clicked.connect(self.__calcular_resultado)
+        self.ui.boton_ac.clicked.connect(self.__borrar)
 
-    def resultado(self):
-        resultado = eval(self.pantalla.text())
-        self.pantalla.setText(str(resultado))
+    def __agregar_valor(self, texto):
+        self.ui.textEdit.setText(self.ui.textEdit.text() + texto)
 
-    def __setup_connections(self):
-        # Conectar señales de botones a métodos
-        self.ui.pushButton.clicked.connect(lambda: self.mostrar("AC"), pantalla.clear())
-        self.ui.pushButton_2.clicked.connect(lambda: self.mostrar("+/-"))
-        self.ui.pushButton_3.clicked.connect(lambda: self.mostrar("%"))
-        self.ui.pushButton_4.clicked.connect(lambda: self.mostrar("/"))
-        self.ui.pushButton_5.clicked.connect(lambda: self.mostrar("*"))
-        self.ui.pushButton_6.clicked.connect(lambda: self.mostrar("7"))
-        self.ui.pushButton_7.clicked.connect(lambda: self.mostrar("8"))
-        self.ui.pushButton_8.clicked.connect(lambda: self.mostrar("9"))
-        self.ui.pushButton_9.clicked.connect(lambda: self.mostrar("-"))
-        self.ui.pushButton_10.clicked.connect(lambda: self.mostrar("1"))
-        self.ui.pushButton_11.clicked.connect(lambda: self.mostrar("4"))
-        self.ui.pushButton_12.clicked.connect(lambda: self.mostrar("3"))
-        self.ui.pushButton_13.clicked.connect(lambda: self.mostrar("5"))
-        self.ui.pushButton_14.clicked.connect(lambda: self.mostrar("+"))
-        self.ui.pushButton_15.clicked.connect(lambda: self.mostrar("6"))
-        self.ui.pushButton_16.clicked.connect(lambda: self.mostrar("2"))
-        self.ui.pushButton_17.clicked.connect(lambda: self.mostrar("0"))
-        self.ui.pushButton_18.clicked.connect(lambda: self.mostrar("="))
-        self.ui.pushButton_19.clicked.connect(lambda: self.mostrar(","))
+    def __calcular_resultado(self):
+        resultado = eval(self.ui.textEdit.text())
+        self.ui.textEdit.setText(str(resultado))
+
+    def __borrar(self):
+        self.ui.textEdit.clear()
 
 
-    @Slot()
-    def on_pushButton_clicked(self):
-        print("Hola")
+    # @Slot()
+    # def on_pushButton_clicked(self):
+    #     print("Hola")
 
     def iniciar(self):
         self.show()
